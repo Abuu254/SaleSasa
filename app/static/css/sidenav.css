@@ -1,0 +1,187 @@
+
+
+.sidenav,
+.rightnav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    z-index: 500;
+    flex-direction: column;
+    background-color: white;
+    transition: 0.4s ease-in-out;
+    background-clip: padding-box;
+    top: 100px;
+    overflow-x: hidden;
+    visibility: visible;
+    padding-top: 1px;
+  }
+
+
+.sidenav{
+  transform: translateX(-100%);
+  left: -800px;
+  width: 360px;
+}
+.rightnav{
+  transform: translateX(100%);
+  right: -800px;
+  width: 360px;
+}
+
+section{
+  display: block;
+}
+
+#mySidenav .sidenav_header,
+#myRightnav .rightnav_header{
+  color: #fff;;
+  background-color: #00356b;;
+}
+
+.cancel,
+.rightcancel {
+  height:16px;
+}
+
+.sidenav_header,
+.rightnav_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+h3 {
+  margin-bottom: 16px;
+  font-family: Roboto, Arial;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: calc(1.275rem + 0.3vw);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+}
+
+.closebtn,
+.right_closebtn {
+  cursor: pointer;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  margin-right: 4px;
+}
+
+.sidenav-body{
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: block;
+}
+
+.info-rows{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.col1{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-left: 6px;
+}
+.col2{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-right: 6px;
+}
+
+.button-reg,
+.button-log {
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
+  width: 14rem;
+}
+.button-reg{
+  background-color: rgb(197, 197, 197);
+  color: #00356b;
+}
+
+.button-log{
+  background-color: #00356b;
+  color: white;
+}
+
+.button-log:hover{
+  opacity: 0.8;
+}
+.button-reg:hover{
+  background-color: #00356b;
+  color: white;
+}
+
+.button-log:active{
+  opacity: 0.5;
+}
+
+.rightnav-body{
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: block;
+}
+
+
+@media screen and (max-height: 550px){
+  #mySidenav{
+    top: 80px;
+  }
+  #myRightnav{
+    top: 80px;
+  }
+}
+
+.activities{
+  display: flex;
+  flex-direction: column;
+}
+.user-functions{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 40px;
+  flex-shrink: 0;
+  margin-left: 40px;
+  margin-top: 10px;
+  visibility: hidden;
+  height: 0;
+}
+@media (max-width: 767px){
+  .user-functions {
+      visibility: visible;
+      height: auto;
+  }
+  }
+.not-cont-2{
+    position: relative;
+}
+.message-cont-2{
+    position: relative;
+}
+
+.side-cat{
+  display: flex;
+  flex-direction: column;
+}
+.side-cat div{
+  padding-left: 10px;
+  padding-top: 10px;
+}

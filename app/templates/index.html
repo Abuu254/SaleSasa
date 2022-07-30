@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+        <div class="main-body-categories">
+        <div class="categories-block">
+            <div class="category-card">
+                <a href="{{ url_for('main.category', category=g.choices[0]) }}">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/phones.svg') }}">
+                        </div>
+                        <p>Phones</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="{{ url_for('main.category', category=g.choices[1]) }}">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/laptops.svg') }}">
+                        </div>
+                        <p>Laptops & Computers</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="{{ url_for('main.category', category=g.choices[2]) }}">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/appliances.svg') }}">
+                        </div>
+                        <p>Appliances</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="{{ url_for('main.category', category=g.choices[3]) }}">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/video.svg') }}">
+                        </div>
+                        <p>Video Games</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="{{ url_for('main.category', category=g.choices[4]) }}">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/books.svg') }}">
+                        </div>
+                        <p>Books</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="">
+                <div class="list-item">
+                    <div class="categories-item">
+                        <div class="categories-image">
+                            <img src="{{ url_for('static', filename='images/sidebar/forum.svg') }}">
+                        </div>
+                        <p>Forums</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+        </div>
+        <div class="main-body-wrapper">
+            <main>
+                <div class="listings-main">
+                    <h3 class="listings-head">{{ head }}</h3>
+                    <div class="listings-flex">
+                        {%for listing in listings%}
+                        {%if listing.post_images() %}
+                            {% include '_listings.html' %}
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+                </div>
+            </main>
+        </div>
+{% endblock %}

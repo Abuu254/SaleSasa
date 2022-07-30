@@ -1,0 +1,179 @@
+
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block head %}
+  {{ super() }}
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
+    rel="stylesheet">
+{% endblock %}
+
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/chat.css')}}">
+{% endblock %}
+
+
+{% block app_content %}
+<div class="chat-wrapper">
+  <div class="container-chat">
+    <div class="container-2-chat">
+    <div class="container-header">
+     <div>
+        <h3 class=" text-center">SaleSasa Chat</h3>
+     </div>
+    </div>
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="srch-sec">
+                <input class="search-bar" type="text" placeholder="Search">
+                <button action="" class="search-btn"><img class="search-icon" src="{{ url_for('static', filename='images/search.svg') }}">
+                </button>
+            </div>
+            <div class="new_chat">
+              <div id="new_chat_overlay"></div>
+              <button id="new_chat_btn"> New Chat </button>
+              <form method="POST" action="{{ url_for('users.new_chat') }}" id="new_chat_form">
+                <label for="username"><strong>Username: </strong></label>
+                <input type="username" name="username" placeholder="type username ">
+                <input type="submit" value="Submit">
+              </form>
+            </div>
+          </div>
+          <div class="inbox_chat">
+            {% for i in data %}
+            <a href="{{ url_for('users.chatting',rid=i.room_id) }}">
+              <div class="chat_list">
+                <div class="chat_people">
+                  <div class="chat_img"> <img src="{{i.user.avatar(70)}}"> </div>
+                  <div class="chat_ib">
+                    <h5>{{ i["user"].username }}</h5>
+                    <div class="{{i.user.id}}" id="last-message" style="color: {% if i.unread_count > 0 %}#0020C2
+                    {% else %}#989898{% endif %};">{{ i["last_message"] }}</div>
+                  </div>
+
+                  <div  class="msg-count" style="visibility: {% if i.unread_count==0 %}hidden
+                  {% else %}visible{% endif %};"><div id="{{ i.room_id }}" class="msg-count-wrapper">{{ i["unread_count"]}}</div></div>
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  {% endblock %}
+
+{% block scripts %}
+    {{ moment.include_moment() }}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"
+    integrity="sha512-eVL5Lb9al9FzgR63gDs1MxcDS2wFu3loYAgjIH0+Hg38tCS8Ag62dwKyH+wzDb+QauDpEZjXbMn11blw8cbTJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+
+        // THIS FUNCTION SHOULD SCROLL DOWN AUTOMATICALLY
+        // let scrollingElement = (document.scrollingElement || document.body)
+        // let msgH = document.querySelectorAll(".msg_history > div"), CurrentLen;
+        // let init = () => {
+        //   CurrentLen = msgH.length;
+        // }
+        // init();
+        // let validatePosition = () => {
+        //   if (msgH.length === CurrentLen) {
+        //     msgH[msgH.length - 1].setAttribute("id", "last_message");
+        //     for (var i; i < msgH.length; i++) {
+        //       if (msgH[i].id === "last_message" && msgH[i] !== msgH.length - 1) {
+        //         msgH[i].removeAttribute("id");
+        //         msgH[msgH.length - 1].setAttribute("id", "last_message");
+        //       }
+        //     }
+        //   }
+        // }
+        // let scrollDown = () => {
+        // //   //scrollingElement.scrollTop = scrollingElement.scrollHeight;
+        // //   //$container.animate({scrollTop: $container[0].scrollHeight }, "slow");
+        //   validatePosition();
+        //   location.href = "#last_message";
+        //   init();
+        // }
+        // SOCKET CODE
+
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/?rid=' + {{ room_id }} );
+
+      </script>
+
+      <script>
+        window.onload = function () {
+          let newChatBtn = document.querySelector('#new_chat_btn');
+          let newChatForm = document.querySelector('#new_chat_form');
+          let newChatoverlay = document.querySelector('#new_chat_overlay');
+          newChatBtn.onclick = (e) => {
+            if (e.target === newChatBtn) {
+              newChatForm.style.display = "block";
+              newChatoverlay.style.display = 'block';
+
+            }
+          }
+
+          newChatoverlay.onclick = (e) => {
+            if (e.target === newChatoverlay) {
+              newChatForm.style.display = "none";
+              newChatoverlay.style.display = 'none';
+            }
+          }
+        }
+
+        jQuery( document ).ready(function( $ ) {
+
+        //Use this inside your document ready jQuery
+        $(window).on('popstate', function() {
+          location.reload(true);
+        });
+
+        });
+      </script>
+      <script>
+        {% for i in data %}
+
+        function {{i.user.username}}(n) {
+        $('#{{i.room_id}}').text(n);
+        $('.{{i.user.id}}').css('color', n ? '#0020C2' : '#989898');
+        $('#{{i.room_id}}').css('visibility', n ? 'visible' : 'hidden');
+        }
+
+            $(function() {
+                var since = 0;
+                setInterval(function() {
+                    $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
+                        function(notifications) {
+                            for (var i = 0; i < notifications.length; i++) {
+                                switch (notifications[i].name) {
+                                    case '{{i.room_id}}':
+                                        {{i.user.username}}(notifications[i].data);
+                                        break;
+                                }
+                                since = notifications[i].timestamp;
+                            }
+                        }
+                    );
+                }, 100);
+            });
+            {% endfor %}
+    </script>
+{{super()}}
+{% endblock %}
+

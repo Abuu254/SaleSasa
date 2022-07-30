@@ -1,0 +1,108 @@
+
+
+* {box-sizing: border-box;}
+
+.form-popup {
+    display: flex;
+    position: fixed;
+    border: 2px solid #f1f1f1;
+  }
+
+.form-container {
+    padding: 2px;
+    background-color: white;
+    padding: 1rem;
+  }
+
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:2px;
+    opacity: 0.8;
+  }
+
+.form-container .btn:hover {
+    opacity: 1;
+  }
+
+.bottom-right{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+
+.info-rows2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 320px;
+
+  }
+
+
+  .col3{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-left: 6px;
+  }
+  .col4{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-right: 6px;
+  }
+
+  .button2-reg,
+  .button2-log {
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 16px;
+    padding-left: 16px;
+    width: 14rem;
+  }
+  .button2-reg{
+    color: rgb(197, 197, 197);
+    background-color: #00356b;
+  }
+
+  .button2-log{
+    background-color: rgb(197, 197, 197);
+    color: #00356b;
+  }
+
+  .button2-log:hover{
+    color: rgb(197, 197, 197);
+    background-color: #00356b;
+  }
+
+  .button2-reg:hover{
+    opacity: 0.8;
+  }
+  .button2-reg:active{
+    opacity: 0.5;
+  }

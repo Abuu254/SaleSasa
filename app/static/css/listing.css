@@ -1,0 +1,266 @@
+
+.listing-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.listing-content{
+    width: 30%;
+    padding-top: 5px;
+    position: sticky;
+    position: -webkit-sticky;
+    align-self: flex-start;
+    top: 100px;
+    background-color: white;
+    margin-right: 6px;
+}
+
+.listing-container-wrap{
+
+}
+
+.container-layout{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+  /* Hide the images by default */
+  .Slides_show {
+    display: none;
+    position: relative;
+  }
+
+  /* Add a pointer when hovering over the thumbnail images */
+  .cursor {
+    cursor: pointer;
+  }
+
+
+  /* Next & previous buttons */
+  .img-prev,
+  .img-next {
+    cursor: pointer;
+    position: absolute;
+    top: 60%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    text-decoration: none;
+  }
+
+  /* Position the "next button" to the right */
+  .img-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .img-prev:hover,
+  .img-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+
+  .my-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Add a transparency effect for thumnbail images */
+  .smaller-img {
+    opacity: 0.6;
+  }
+
+  .active,
+  .smaller-img:hover {
+    opacity: 1;
+  }
+
+  .bottom-images{
+    display: flex;
+    padding: 1px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    flex-direction: row;
+  }
+
+  .top-image, .my-row{
+    flex: 1 1 0;
+    object-fit: cover;
+    position: relative;
+  }
+
+
+  .top-image img, .my-row img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+.post-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.post-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* item */
+
+.item-wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: 6px;
+}
+.item-wrapper hr{
+  width: 90%;
+  height: 1px;
+  color: grey;
+  background-color: grey;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.item-title{
+  color: rgb(73, 73, 73);
+
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+}
+.description h3{
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+
+.description-content{
+  padding: 4px;
+  padding-left: 8px;
+}
+
+.seller-info{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 4px;
+}
+
+.seller-info-user, .stats{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+.review-stars{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.stats, .review-stars{
+  justify-content: space-between;
+}
+.seller-info-user-image img{
+border-radius: 24px;
+}
+
+.reviews, .seller-cont{
+  display: flex;
+  flex-direction: column;
+}
+
+.seller-cont div{
+  margin-left: 5px;
+}
+.seller-cont div a{
+  text-decoration: none;
+}
+.seller-cont div h5{
+  margin-bottom: 2px;
+}
+
+.stats hr{
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+
+.checkout{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,.125);
+  width: 27%;
+  padding-left: 5px;
+  justify-content: space-between;
+}
+
+.add, .buy{
+  width: 100%;
+  cursor: pointer;
+}
+
+.add-wrapper, .buy-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.buy-container{
+  margin: 8px;
+  min-width: 160px;
+}
+
+
+@media (max-width: 600px){
+  .listing-content, .item-wrapper, .checkout {
+    width: 100%;
+
+  }
+  }
+
+  @media (max-width: 600px){
+    .listing-content {
+      width: 80%;
+      position: relative;
+      top: 0;
+      margin-left: 10%;
+      margin-right: 10%;
+
+    }
+    }

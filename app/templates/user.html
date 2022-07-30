@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+<div class="profile-view">
+    <div class="view-1">
+        <div style="width: 70px;"> <img class="view-1-image" src="{{ user.avatar(70) }}"> </div>
+        <div>
+            <h2>{{ 'User' }}: {{ user.username }}</h2>
+            {% if user.last_seen %}
+            <p>{{ 'Last seen on' }}: {{ moment(user.last_seen).format('LLL') }}</p>
+            {% endif %}
+            {% if user == current_user %}
+            <p><a href="">{{ 'Edit your profile' }}</a></p>
+            {% endif %}
+            {% if user != current_user %}
+            <p><a href="{{url_for('main.send_message', recipient=user.username)}}">{{ 'Send private message' }}</a></p>
+            {% endif %}
+            {% set active = user.user_active_listings() %}
+            <p>Active: {{ active|length }}</p>
+            {% set sold = user.user_inactive_listings() %}
+            <p>Sold: {{sold|length}}</p>
+            {% set bought = user.user_bought_listings() %}
+            <p>Bought: {{bought|length}}</p>
+            <p>0 Stars</p>
+            <p>0 Reviews</p>
+        </div>
+    </div>
+    <div>
+        <h3>Recent Reviews</h3>
+    </div>
+    <div>
+        <div class="listings-main">
+            <h3 class="listings-head">Active Listings</h3>
+            <div class="listings-flex">
+                {%for listing in active%}
+                {%if listing.post_images() %}
+                    {% include '_listings.html' %}
+                {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,272 @@
+{%extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - SaleSasa{% else %}{{'Welcome to SaleSasa'}}{% endif %}
+{% endblock %}
+
+
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/sidenav.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/listing.css')}}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+
+<!--  The navigation header -->
+{%block navbar%}
+<div class="header">
+    <div class="left-sec">
+        <span id="my_menu_1" class="menu" onclick="openNav()"><image src="{{ url_for('static', filename='images/menu.svg') }}"></image></span>
+        <span id="my_menu_2" style="font-size:30px;cursor:pointer" onclick="closeNav()"><image class="menu" src="{{ url_for('static', filename='images/menu.svg') }}"></image></span>
+        <div class="logo">
+            <a href="{{ url_for('main.index') }}"><image src="{{ url_for('static', filename='images/logo.png') }}"></a>
+        </div>
+    </div>
+
+    <div class="mid-sec">
+        <input class="search-bar" type="text" placeholder="Search">
+        <button action="" class="search-btn"><img class="search-icon" src="{{ url_for('static', filename='images/search.svg') }}">
+            <div class="tooltip">{{'Search'}}</div>
+        </button>
+    </div>
+
+    <div class="right-sec">
+        {% if current_user.is_anonymous %}
+
+        <div class="upload-icon-container">
+            <a onclick="openRight()"><div>Login</div></a>
+        </div>
+
+        {% else %}
+        <div class="upload-icon-container">
+            <a href="{{ url_for('main.list_form') }}"><image class="list-icon" src="{{ url_for('static', filename='images/list.svg') }}"></a>
+            <div class="tooltip">{{'List'}}</div>
+        </div>
+
+        <div class="message-cont">
+        <a href="{{url_for('users.chat')}}">
+            {% set new_messages = current_user.new_messages_notification() %}
+            <image class="message-icon" src="{{ url_for('static', filename='images/download.svg') }}"></image>
+            <div id="message_count" class="not-num" style="visibility: {% if new_messages %}visible
+            {% else %}hidden{% endif %};">{{new_messages}}</div>
+        </a>
+        </div>
+
+        <div class="not-cont">
+            <image class="notifications-icon" src="{{ url_for('static', filename='images/notifications.svg') }}">
+            <div class="not-num">3</div>
+        </div>
+        {%endif%}
+
+        {% if current_user.is_anonymous %}
+
+        <span  id="my_user_1" style="font-size:30px;cursor:pointer" onclick="openRight()"><image class="channel-icon" src="{{ url_for('static', filename='images/user.svg') }}"></span>
+        <span  id="my_user_2" style="font-size:30px;cursor:pointer" onclick="closeRight()"><image class="channel-icon" src="{{ url_for('static', filename='images/user.svg') }}"></span>
+
+        {% else %}
+        <span  id="my_user_1" style="font-size:30px;cursor:pointer" onclick="openRight()"><image class="channel-icon" src="{{current_user.avatar(70)}}"></span>
+        <span  id="my_user_2" style="font-size:30px;cursor:pointer" onclick="closeRight()"><image class="channel-icon" src="{{current_user.avatar(70)}}"></span>
+        {%endif%}
+    </div>
+</div>
+
+
+<!--  left Side navigation information -->
+<section>
+    <div id="mySidenav" class="sidenav" data-bs-scroll="true" data-bs-backdrop="true" aria-hidden="true" tabindex="-1" >
+
+        <div class="sidenav_header">
+            <h3>
+                Economize with SaleSasa
+            </h3>
+            <a class="closebtn" onclick="closeNav()"><image class="cancel" src="{{ url_for('static', filename='images/cancel.png') }}"></a>
+        </div>
+
+        <div class="sidenav-body">
+            <div class="info-rows">
+                {% if current_user.is_anonymous %}
+                <div class="col1" id="col1">
+                    <a><button class="button-log" onclick="openRight()">Login</button></a>
+                </div>
+                <div class="col2">
+                    <a href= "{{ url_for('auth.register') }}"><button class="button-reg">Register</button></a>
+                </div>
+                {%else%}
+                <div class="col1" id="col1">
+                    <a href=""><button class="button-log">My SaleSasa</button></a>
+                </div>
+                <div class="col2">
+                    <a href= "{{url_for('users.profile')}}"><button class="button-reg">My Profile</button></a>
+                </div>
+                {%endif%}
+            </div>
+
+
+            <div>
+                <div>Sell</div>
+                <div>Cart</div>
+                <div>Forums</div>
+                <div>Help</div>
+            </div>
+            <h4>Shop</h4>
+            <div class="side-cat">
+                <div><p>Phones</p></div>
+                <div><p>Laptops & Computers</p></div>
+                <div><p>Appliances</p></div>
+                <div><p>Video Games</p></div>
+                <div><p>Books</p></div>
+            </div>
+            <div>
+                <a href= "{{ url_for('auth.logout') }}"><button class="button-reg">Logout</button></a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div id="myRightnav" class="rightnav" data-bs-scroll="true" data-bs-backdrop="true" aria-hidden="true">
+
+        <div class="rightnav_header">
+            {% if current_user.is_anonymous %}
+            <h3>
+                Login for Good Deals
+            </h3>
+            <a class="right_closebtn" onclick="closeRight()"><image class="rightcancel" src="{{ url_for('static', filename='images/cancel.png') }}"></a>
+            {%else%}
+            <h3>
+                My SaleSasa
+            </h3>
+            <a class="right_closebtn" onclick="closeRight()"><image class="rightcancel" src="{{ url_for('static', filename='images/cancel.png') }}"></a>
+            {%endif%}
+        </div>
+        {% if current_user.is_anonymous %}
+    <div class="rightnav-body">
+        <div>
+            <div class="form-popup" id="myForm">
+                <form method="POST" action="{{ url_for('auth.quick_login') }}" class="form-container">
+                  <label for="username"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="username" required>
+
+                  <label for="password"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="password" required>
+                  <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="info-rows2">
+            <div class="col3" id="col3">
+                <a><button class="button2-log" >Forgot Password</button></a>
+            </div>
+            <div class="col4">
+                <a href="{{ url_for('auth.register') }}"><button class="button2-reg">Register</button></a>
+            </div>
+        </div>
+        <div class="bottom-right">
+            <a href="{{ url_for('auth.login') }}"><span >Main Log In Page</span></a>
+        </div>
+    </div>
+    {%else%}
+    <div class="activities">
+        <div class="user-functions">
+            <div class="upload-icon-container-2">
+                <a href="{{ url_for('main.list_form') }}"><image class="list-icon" src="{{ url_for('static', filename='images/list.svg') }}"></a>
+                <div class="tooltip">{{'List'}}</div>
+            </div>
+
+            <div class="message-cont-2">
+                <a href="{{url_for('users.chat')}}">
+                    {% set new_messages = current_user.new_messages_notification() %}
+                    <image class="message-icon" src="{{ url_for('static', filename='images/download.svg') }}"></image>
+                    <div id="message_count_2" class="not-num" style="visibility: {% if new_messages %}visible
+                    {% else %}hidden{% endif %};">{{new_messages}}</div>
+                </a>
+            </div>
+
+            <div class="not-cont-2">
+                <image class="notifications-icon" src="{{ url_for('static', filename='images/notifications.svg') }}">
+                <div class="not-num">3</div>
+            </div>
+        </div>
+        <div>My SaleSasa</div>
+        <div>My Profile</div>
+        <div>My Listings</div>
+        <div>My Sales</div>
+        <div>My Purchases</div>
+        <div>My Forums</div>
+    </div>
+    <div>
+        <a href= "{{ url_for('auth.logout') }}"><button class="button-reg">Logout</button></a>
+    </div>
+    {%endif%}
+    </div>
+
+</section>
+
+
+{%endblock%}
+
+{%block content%}
+<div>
+    <div class="main-body">
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div id="my_alert" class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+    {%block app_content%}{%endblock%}
+    </div>
+    <div class="footer">
+        <div class="inner-footer">
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{% block scripts %}
+{{super()}}
+{{ moment.include_moment() }}
+<script type="text/javascript" src="{{url_for('static', filename='js/sidenav.js')}}"></script>
+
+<script>
+    function set_message_count(n) {
+    $('#message_count').text(n);
+    $('#message_count').css('visibility', n ? 'visible' : 'hidden');
+    }
+
+{% if current_user.is_authenticated %}
+        $(function() {
+            var since = 0;
+            setInterval(function() {
+                $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
+                    function(notifications) {
+                        for (var i = 0; i < notifications.length; i++) {
+                            switch (notifications[i].name) {
+                                case 'unread_message_count':
+                                    set_message_count(notifications[i].data);
+                                    break;
+                            }
+                            since = notifications[i].timestamp;
+                        }
+                    }
+                );
+            }, 1000);
+        });
+        {% endif %}
+</script>
+
+{% endblock %}
+

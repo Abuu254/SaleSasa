@@ -1,0 +1,38 @@
+
+
+<div class="listing-card">
+    <a href="{{ url_for('main.listing', listing_id=listing.id, name=listing.item_name) }}">
+        <div class="listing-preview">
+            <div class="listing-layout">
+                <div class="user-details">
+                    <div class="user-icon">
+                        {% if listing.listing_owner %}
+                        <div>
+                            <image class="prof-pic" src="{{listing.listing_avatar(70)}}">
+                            <!-- <a href="{{ url_for('main.user', username=listing.listing_owner) }}">
+
+                            </a> -->
+                        </div>
+                        {%endif%}
+                    </div>
+                    <div class="listing-details">
+                        <div class="listing-title">{{listing.title}}</div>
+                        <div class="listing-category">{{listing.category}}</div>
+                        <div class="listing-author">{{listing.listing_owner}}</div>
+                        <div class="listing-description">{{listing.description}}</div>
+                    </div>
+                </div>
+                <div class="list-image">
+                    <div class="image-wrapper">
+                        <img src="{{ url_for('main.upload', photoname=listing.post_images()[0], id=listing.id) }}" >
+                        <div class="img-number">Images: {{ listing.post_images()| length}}</div>
+                    </div>
+                </div>
+                <div class="list-pricing">
+                    <div class="item-name">{{listing.item_name}}</div>
+                    <div class="item-price">{{listing.item_price}}</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

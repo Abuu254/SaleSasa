@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    <div>
+        <h3>My Profile</h3>
+        <a href="{{url_for('main.user', username=current_user.username)}}">View Profile</a>
+    </div>
+
+<div class="profile-wrapper">
+
+    <div>
+        <h3>Public Information</h3>
+        <h4>Display Name</h4>
+        <h6>{{current_user.username}}</h6>
+        <h4>Profile Image</h4>
+        <div style="width: 160px;"> <img src="{{ current_user.avatar(160) }}"></div>
+        <div>Save Profile</div>
+    </div>
+    <div>
+        <h3>Private Information</h3>
+        <div>First Name</div>
+        <div>Abuu</div>
+        <div>Last Name</div>
+        <div>Rama</div>
+
+        <div>Email Address <p>Change</p></div>
+        <div>{{current_user.email}}</div>
+        <div>Save Profile</div>
+        <div>Change Password</div>
+    </div>
+    <div>
+        <h3>Location Information</h3>
+        <h5>Country</h5>
+        <div>Kenya</div>
+        <h5>Address</h5>
+        <div>Nairobi</div>
+        <h5>Timezone</h5>
+        <div>EST</div>
+        <div>Save Profile</div>
+    </div>
+    <div>
+        <h3>Export Your Information</h3>
+        <div>Export Data</div>
+    </div>
+    <div>
+        <h3>Delete Account</h3>
+        <div>Delete Account</div>
+    </div>
+
+</div>
+
+{% endblock %}

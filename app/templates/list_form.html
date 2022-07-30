@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<div class="post-body">
+    <div class="post-header">
+        <h3>{{'Post Your Listing'}}</h3>
+    </div>
+    <div>
+        <form class="post-form" method="POST" action="{{ url_for('main.list')}}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.list_title.label }}
+            </div>
+            <div>
+                {{ form.list_title }}
+            </div>
+            <div>
+                {{ form.category.label }}
+            </div>
+            <div>
+                {{ form.category }}
+            </div>
+            <div>
+                {{ form.description.label }}
+            </div>
+            <div>
+                {{ form.description }}
+            </div>
+            <div>
+                {{ form.item_name.label }}
+            </div>
+            <div>
+                {{ form.item_name }}
+            </div>
+            <div>
+                {{ form.currency.label }}
+            </div>
+            <div>
+                {{ form.currency }}
+            </div>
+            <div>
+                {{ form.item_price.label }}
+            </div>
+            <div>
+                {{ form.item_price }}
+            </div>
+            <div>
+                {{ form.inputFile.label }}
+            </div>
+            <div>
+                {{ form.inputFile }}
+            </div>
+            <div>
+                {{ form.submit }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
